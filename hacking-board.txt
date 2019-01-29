@@ -1,0 +1,35 @@
+Tu veux créer un message board à la Hacker News. 
+Les utilisateurs peuvent poster des liens. 
+Les autres utilisateurs peuvent commenter les liens soumis, 
+ou commenter les commentaires (mais on ne peut pas aller plus loin qu'un commentaire de commentaire). 
+Comment faire en sorte qu'un commentaire sache où dans la hiérarchie il se trouve ? 🤔
+
+CREATE TABLE user (
+  id INTEGER PRIMARY KEY,
+  name TEXT
+);
+
+CREATE TABLE links (
+  id INTEGER PRIMARY KEY,
+  url TEXT,
+  user_id INTEGER,
+  FOREIGN KEY (user_id) REFERENCES user(id)
+);
+
+CREATE TABLE comments (
+  id INTEGER PRIMARY KEY,
+  body TEXT,
+  links_id INTEGER, 
+  user_id INTEGER,
+  FOREIGN KEY (links_id) REFERENCES links(id),
+  FOREIGN KEY (user_id) REFERENCES user(id)
+);
+
+CREATE TABLE comments_on_comment (
+  id INTEGER PRIMARY KEY,
+  body TEXT, 
+  comments_id, 
+  FOREIGN KEY (comments_id) REFERENCES comments(id)
+);
+
+# Normalement ca fonctionne !

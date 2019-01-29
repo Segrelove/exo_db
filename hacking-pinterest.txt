@@ -1,0 +1,57 @@
+Tu veux faire de la concurrence à Pinterest, donc tu voudrais créer un site où 
+les utilisateurs peuvent créer des "pins". 
+Chaque pin contient l'URL d'une image sur le net. 
+Les utilisateurs peuvent commenter les pins, mais ne peuvent pas commenter les commentaires.
+
+CREATE TABLE user (
+  id INTEGER PRIMARY KEY,
+  name TEXT
+);
+
+CREATE TABLE pins (
+  id INTEGER PRIMARY KEY,
+  name TEXT,
+  url TEXT,
+  user_id INTEGER,
+  FOREIGN KEY (user_id) REFERENCES user(id)
+);
+
+CREATE TABLE comments (
+  id INTEGER PRIMARY KEY,
+  body TEXT,
+  user_id INTEGER,
+  pins_id INTEGER,
+  FOREIGN KEY (pins_id) REFERENCES pins(id),
+  FOREIGN KEY (user_id) REFERENCES user(id)
+);
+
+INSERT INTO user ('name') VALUES ('Maxime');
+INSERT INTO user ('name') VALUES ('Julie');
+INSERT INTO user ('name') VALUES ('Gregoire');
+INSERT INTO user ('name') VALUES ('Mara');
+INSERT INTO user ('name') VALUES ('Nicolas');
+
+INSERT INTO pins ('name', 'url', 'user_id') VALUES ('Une chatte', 'https://chaton.fr/chatte.img', '1');
+INSERT INTO pins ('name', 'url', 'user_id') VALUES ('Un perroquet', 'https://chaton.fr/perroquet.img', '1');
+INSERT INTO pins ('name', 'url', 'user_id') VALUES ('Une chienne', 'https://chaton.fr/chienne.img', '1');
+INSERT INTO pins ('name', 'url', 'user_id') VALUES ('Un caze', 'https://chaton.fr/caze.img', '2');
+INSERT INTO pins ('name', 'url', 'user_id') VALUES ('Une cterr', 'https://chaton.fr/cterr.img', '2');
+INSERT INTO pins ('name', 'url', 'user_id') VALUES ('Un perroquet mignon', 'https://chaton.fr/perroquet-mignon.img', '3');
+INSERT INTO pins ('name', 'url', 'user_id') VALUES ('Une chienne gentille', 'https://chaton.fr/chienne-gentil.img', '4');
+INSERT INTO pins ('name', 'url', 'user_id') VALUES ('Un chiot', 'https://chaton.fr/chiot.img', '5');
+
+INSERT INTO comments ('body', 'user_id', 'pins_id') VALUES ('Trop mimi mdr', '1', '1');
+INSERT INTO comments ('body', 'user_id', 'pins_id') VALUES ('Trop fans <3', '1', '2');
+INSERT INTO comments ('body', 'user_id', 'pins_id') VALUES ('Merci lol !', '2', '1');
+INSERT INTO comments ('body', 'user_id', 'pins_id') VALUES ('Trop cool toi et moi for life', '2', '2');
+INSERT INTO comments ('body', 'user_id', 'pins_id') VALUES ('GLP', '3', '1');
+INSERT INTO comments ('body', 'user_id', 'pins_id') VALUES ('GLP SVP', '3', '2');
+
+
+# Qui commente quoi
+SELECT * FROM pins
+JOIN user ON user.id = comments.user_id;
+
+# Qui pins quoi
+SELECT * FROM pins
+JOIN user ON user.id = pins.user_id;

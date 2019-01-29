@@ -1,0 +1,51 @@
+CREATE TABLE course_desc (
+  id INTEGER PRIMARY KEY,
+  name TEXT,
+  description TEXT
+);
+
+CREATE TABLE course_lesson (
+  id INTEGER PRIMARY KEY,
+  title TEXT,
+  body TEXT,
+  course_id INTEGER,
+  FOREIGN KEY(course_id) REFERENCES course_desc(id)
+);
+
+INSERT INTO course_desc ('name', 'description') VALUES ('RoR','Langage trop cool');
+INSERT INTO course_desc ('name', 'description') VALUES ('JS','Langage relou et yolo style');
+INSERT INTO course_desc ('name', 'description') VALUES ('HTML','Langage sympa');
+INSERT INTO course_desc ('name', 'description') VALUES ('CSS','Langage design');
+
+INSERT INTO course_lesson ('title', 'body', 'course_id') VALUES ('Ruby Basics 1/2','Fais une loop','1');
+INSERT INTO course_lesson ('title', 'body', 'course_id') VALUES ('Ruby Basics 2/2','Fais une def','1');
+INSERT INTO course_lesson ('title', 'body', 'course_id') VALUES ('Ruby POO 1/2','Demerde toi','1');
+INSERT INTO course_lesson ('title', 'body', 'course_id') VALUES ('JS Basics 1/2','Fais une loop','2');
+INSERT INTO course_lesson ('title', 'body', 'course_id') VALUES ('JS Basics 2/2','Fais une function','2');
+INSERT INTO course_lesson ('title', 'body', 'course_id') VALUES ('JS Framework','Va sur stackoverflow','2');
+INSERT INTO course_lesson ('title', 'body', 'course_id') VALUES ('HTML','.html5 sur VScode, felicitation','3');
+INSERT INTO course_lesson ('title', 'body', 'course_id') VALUES ('CSS 101','getbootstrap.com','4');
+
+# Pour RoR
+SELECT * FROM course_lesson
+JOIN course_desc ON course_desc.id = course_lesson.course_id
+WHERE course_desc.id = '1';
+
+# Pour JS
+SELECT * FROM course_lesson
+JOIN course_desc ON course_desc.id = course_lesson.course_id
+WHERE course_desc.id = '2';
+
+# Pour HTML 
+SELECT * FROM course_lesson
+JOIN course_desc ON course_desc.id = course_lesson.course_id
+WHERE course_desc.id = '3';
+
+# Pour CSS 
+SELECT * FROM course_lesson
+JOIN course_desc ON course_desc.id = course_lesson.course_id
+WHERE course_desc.id = '4';
+
+# Pour tous les cours 
+SELECT * FROM course_lesson
+JOIN course_desc ON course_desc.id = course_lesson.course_id

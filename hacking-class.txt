@@ -1,0 +1,18 @@
+Tu vas encore faire un site d'éducation en ligne. 
+Dans ce site il y aura des élèves qui peuvent s'inscrire à un seul cours. 
+Un cours pourra avoir plusieurs élèves.
+
+CREATE course (
+  id INTEGER PRIMARY KEY,
+  desc TEXT,
+  body, TEXT
+);
+
+CREATE user (
+  id INTEGER PRIMARY KEY,
+  name TEXT,
+  course_id,
+  FOREIGN KEY (course_id), REFERENCES course(id)
+);
+
+#Normalement, ca aussi ca fonctionne

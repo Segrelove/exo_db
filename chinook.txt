@@ -1,0 +1,61 @@
+# 1 -> Récupérer tous les albums
+
+SELECT * FROM albums;
+
+# 2 -> Récupérer tous les albums dont le titre contient "Great"
+
+SELECT * FROM albums
+WHERE albums.Title LIKE '%great%';
+
+# 3 -> Donner le nombre total d'albums contenus dans la base (sans regarder les id bien sûr)
+
+SELECT count(*) FROM albums;
+
+# 4 -> Supprimer tous les albums dont le nom contient "music"
+
+DELETE
+FROM albums
+WHERE albums.Title LIKE '%music%';
+
+# 5 -> Récupérer tous les albums écrits par AC/DC
+
+SELECT * FROM albums
+JOIN artists ON artists.ArtistId = albums.ArtistId
+WHERE artists.Name = 'AC/DC';
+
+# 6 -> Récupérer tous les titres des albums de AC/DC
+
+SELECT * FROM tracks
+JOIN artists ON artists.ArtistId = tracks.AlbumId
+WHERE artists.name = "AC/DC";
+
+# 7 -> Récupérer la liste des titres de l'album "Let There Be Rock"
+
+SELECT 
+SUM(UnitPrice)
+FROM albums
+JOIN tracks ON tracks.AlbumId = albums.AlbumId
+WHERE albums.Title = "Let There Be Rock";
+
+SELECT 
+SUM(Milliseconds)
+FROM albums
+JOIN tracks ON tracks.AlbumId = albums.AlbumId
+WHERE albums.Title = "Let There Be Rock";
+
+# 8 -> Afficher le coût de l'intégralité de la discographie de "Deep Purple"
+
+SELECT * FROM albums
+JOIN artists ON artists.ArtistId = albums.ArtistId
+WHERE artists.Name = 'Deep Purple';
+## JE NAI PAS TROUVE...
+
+#9 -> 
+Steve Ray Vaughan, artists.ArtistId = 276 ! 
+albums.AlbumId = 348 !
+MediaTypeID = 2
+GenreId = 6
+
+INSERT INTO artists ('Name') VALUES ('Steve Ray Vaughan');
+INSERT INTO albums ('Title', 'ArtistId') VALUES ('Texas Flood', '276');
+INSERT INTO tracks ('Name', 'AlbumId', 'MediaTypeId', 'GenreId', 'Composer', 'Milliseconds', 'Bytes','UnitPrice') VALUES ('Love Struck Baby', '348', '2', '6', 'Steve Ray Vaughan', '127328', '772288', '0.99');
